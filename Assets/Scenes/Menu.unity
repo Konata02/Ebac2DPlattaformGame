@@ -3718,7 +3718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2324149143119107833, guid: ac655fba791ecce4c845c4098c125cbf, type: 3}
       propertyPath: m_Name
-      value: Button (1)
+      value: ButtonCredits
       objectReference: {fileID: 0}
     - target: {fileID: 2829355488758909111, guid: ac655fba791ecce4c845c4098c125cbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3873,7 +3873,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2324149143119107833, guid: ac655fba791ecce4c845c4098c125cbf, type: 3}
       propertyPath: m_Name
-      value: Button (2)
+      value: ButtonExit
       objectReference: {fileID: 0}
     - target: {fileID: 2829355488758909111, guid: ac655fba791ecce4c845c4098c125cbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -4016,7 +4016,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2324149143119107833, guid: ac655fba791ecce4c845c4098c125cbf, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: ButtonPlay
       objectReference: {fileID: 0}
     - target: {fileID: 2829355488758909111, guid: ac655fba791ecce4c845c4098c125cbf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

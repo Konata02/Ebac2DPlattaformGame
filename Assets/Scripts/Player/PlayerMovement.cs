@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement(){
 
-        _isrunning = Input.GetKey(KeyCode.LeftControl);
+        _isrunning = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift));
 
         if (Input.GetKey(KeyCode.LeftArrow)){
             if(_isrunning == false){
