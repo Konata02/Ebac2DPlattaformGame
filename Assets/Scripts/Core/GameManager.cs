@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
    public List<GameObject> enemies;
 
    [Header("References")]
-   public Transform startPoint;
+   //public Transform startPoint;
    private GameObject _currentPlayer;
 
    public float duration = .2f;
@@ -25,16 +25,16 @@ public void Start(){
 }
 
 public void Init(){
-    SpawnPlayer();
+    //SpawnPlayer();
 
 }
 
-private void SpawnPlayer(){
+/*private void SpawnPlayer(){
 
     
     _currentPlayer = Instantiate(player);
     _currentPlayer.transform.position = startPoint.transform.position;
     _currentPlayer.transform.DOScale(0, duration).SetEase(ease).From().SetDelay(delay);
-}
+}*/
 
 }
