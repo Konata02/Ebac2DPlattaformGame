@@ -13,12 +13,21 @@ public class PlayerMovement : MonoBehaviour
     public float speedRun; 
     public float forceJump = 2;
     private bool _isrunning = false;
+    public PoolManager poolManager;
+    //public GameObject projectile;
+    public Transform positionToShoot;
+    public Transform playerSideReference;
 
     // Update is called once per frame
     void Update()
     {
         HandleJump();
         HandleMovement();
+
+        if (Input.GetKeyDown(KeyCode.S)){
+            Shoot();
+        }
+
 
     }
 
@@ -63,11 +72,21 @@ public class PlayerMovement : MonoBehaviour
     private void HandleJump(){
 
         if (Input.GetKeyDown(KeyCode.Space)){
-            ANIM_player.SetBool("isJumping",true);  
+            //ANIM_player.SetBool("isJumping",true);  
             player.velocity = Vector2.up * forceJump;
         }
         
 
     }
+
+
+    private void Shoot(){
+        var obj = poolManager.GetPooledObject();
+        obj.SetActive(true);
+        obj.GetComponent<Projectile>().StartProjectile();
+        obj.transform.position = positionToShoot.transform.position;
+        obj.GetComponent<Projectile>().side= playerSideReference.transform.localScale.x;
+    }
+
 
 }

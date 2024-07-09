@@ -9,11 +9,21 @@ public class HealthBase : MonoBehaviour
     private int _currentLife;
     public bool destroyOnKill = false;
     private bool _isDead = false;
-
+    public Animator ANIM_Player;
+    public string ani_death = "death";
     public float delayToKill = 0f;
+    //public Action OnKill;
     
     private void Awake(){
         Init();
+
+       /* if(healthBase != null){
+            healthBase.OnKill += OnEnemyKill();
+        }*/
+
+    }
+
+    private void OnEnemyKill(){
 
     }
 
@@ -37,7 +47,11 @@ public class HealthBase : MonoBehaviour
         _isDead = true;
 
         if(destroyOnKill){
-        Destroy(gameObject,delayToKill);
+        ANIM_Player.SetTrigger(ani_death);
+         Destroy(gameObject,delayToKill);
         }
+        //OnKill.Invoke();
+    
     }
+
 }
