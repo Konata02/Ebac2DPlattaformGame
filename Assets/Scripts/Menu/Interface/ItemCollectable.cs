@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ItemCollectable: CollectBase
 {
-
+    public SOInt value;
     protected override void OnCollected()
     {
         
 
         if (CoinsManager.Instance != null)
         {
-            CoinsManager.Instance.AddCoins();
+            CoinsManager.Instance.AddCoins(value.value);
         }
         else
         {

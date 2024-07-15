@@ -5,22 +5,33 @@ using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public SOPlayerController playerElement;
     public Rigidbody2D player;
-    //public Vector2 velocity;
-    public Vector2 friction = new Vector2(.1f,0);
     public Animator ANIM_player;
+    
+    /*
+    public Vector2 velocity;
+    public Vector2 friction = new Vector2(.1f,0);
     public float speed;
     public float speedRun; 
     public float forceJump = 2;
     private bool _isrunning = false;
+    */
+
     public PoolManager poolManager;
     //public GameObject projectile;
     public Transform positionToShoot;
     public Transform playerSideReference;
 
+
+    
     // Update is called once per frame
+
+
     void Update()
     {
+           
+
         HandleJump();
         HandleMovement();
 
@@ -33,19 +44,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement(){
 
-        _isrunning = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift));
+        playerElement._isrunning = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift));
 
 
         if (Input.GetKey(KeyCode.LeftArrow)){
             ANIM_player.SetBool("running",true); 
             
-            if(_isrunning == false){
-                player.velocity = new Vector2(-speed, player.velocity.y);
+            if(playerElement._isrunning == false){
+                player.velocity = new Vector2(-playerElement.speed, player.velocity.y);
             }
             else {
-                player.velocity = new Vector2(-speedRun, player.velocity.y);
+                player.velocity = new Vector2(-playerElement.speedRun, player.velocity.y);
             }
-            player.velocity += friction;
+            player.velocity += playerElement.friction;
             if (player.transform.localScale.x != -1){
                 player.transform.DOScaleX(-1, .1f);
             } 
@@ -54,13 +65,13 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.RightArrow)){
             ANIM_player.SetBool("running",true);     
 
-            if(_isrunning == false){
-                player.velocity = new Vector2(speed, player.velocity.y);
+            if(playerElement._isrunning == false){
+                player.velocity = new Vector2(playerElement.speed, player.velocity.y);
             }
             else{
-                player.velocity = new Vector2(speedRun, player.velocity.y);
+                player.velocity = new Vector2(playerElement.speedRun, player.velocity.y);
             }
-            player.velocity -= friction;
+            player.velocity -= playerElement.friction;
             if (player.transform.localScale.x != 1){
                 player.transform.DOScaleX(1, .1f);
             }  
@@ -73,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space)){
             //ANIM_player.SetBool("isJumping",true);  
-            player.velocity = Vector2.up * forceJump;
+            player.velocity = Vector2.up * playerElement.forceJump;
         }
         
 

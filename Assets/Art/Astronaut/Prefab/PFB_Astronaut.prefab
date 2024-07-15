@@ -1056,15 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddf9ba53aac4ec4ca94739d6c613e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8504955979141686357}
-  friction: {x: 0.1, y: 0}
-  ANIM_player: {fileID: 6413013834153556191}
-  speed: 10
-  speedRun: 20
-  forceJump: 15
-  poolManager: {fileID: 0}
-  projectile: {fileID: 1814760800216636878, guid: 90a622ac7059c6e48b601103d0204b59, type: 3}
-  positionToShoot: {fileID: 2578746407750574490}
+  SOPlayerElement: {fileID: 11400000, guid: 6d6b3cd709cd2c04ba28a99faf81c9e0, type: 2}
 --- !u!114 &7535963745949691187
 MonoBehaviour:
   m_ObjectHideFlags: 0

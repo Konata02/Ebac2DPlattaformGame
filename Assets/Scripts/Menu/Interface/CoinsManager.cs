@@ -3,32 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ebac.Singleton;
 using TMPro;
+using Unity.VisualScripting;
 
-public class CoinsManager : Singleton<CoinsManager>
+public class CoinsManager : Ebac.Singleton.Singleton<CoinsManager>
 {
-    public int coins;
-    public TextMeshProUGUI textCoinsCounter;
+    public SOInt coins;
+    //public TextMeshProUGUI textCoinsCounter;
 
 
 
-    protected void Awake(){
+    protected override void Awake(){
         base.Awake();
         Reset();
+        
     }
     
     private void Reset(){
         
-        coins = 0;
-        UpdateCoinsUI();
+        coins.value = 0;
+        //UpdateCoinsUI();
     }
 
     public void AddCoins(int amount = 1){
         
-        coins += amount;
-        UpdateCoinsUI();
+        coins.value  += amount;
+        //UpdateCoinsUI();
     }
 
-    private void UpdateCoinsUI()
+    /*private void UpdateCoinsUI()
     {
         
         if (textCoinsCounter != null)
@@ -42,6 +44,8 @@ public class CoinsManager : Singleton<CoinsManager>
         {
             Debug.LogWarning("Text Coins Counter não atribuído em CoinsManager.");
         }
-    }
+    }*/
+
+    
     
 }
