@@ -6,7 +6,9 @@ using UnityEngine;
 public class CollectBase : MonoBehaviour
 {
     public string compareTag = "Player";
+    public ParticleSystem collectParticleSystem;
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag(compareTag))
@@ -19,14 +21,23 @@ public class CollectBase : MonoBehaviour
     {
         Debug.Log("Moeda Coletada");
         OnCollected();
-        //Destroy(gameObject);
-        gameObject.SetActive(false);
+         Invoke("DeactivateGameObject", 0.5f);
+        
        
     }
 
     protected virtual void OnCollected()
     {
-        // Este método pode ser sobrescrito nas classes derivadas
+        if(collectParticleSystem != null) { 
+            collectParticleSystem.Play();
+        }
+               
     }
+
+    void DeactivateGameObject()
+    {
+        Destroy(gameObject);
+    }
+
 }
 

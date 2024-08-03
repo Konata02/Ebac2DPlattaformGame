@@ -11,5 +11,10 @@ public class SOPlayerController : ScriptableObject
     public float speed;
     public float speedRun; 
     public float forceJump = 2;
+   
     public bool _isrunning = false;
+
+
+
+ 
 }

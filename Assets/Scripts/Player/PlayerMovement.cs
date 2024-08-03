@@ -9,29 +9,38 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D player;
     public Animator ANIM_player;
     
-    /*
-    public Vector2 velocity;
-    public Vector2 friction = new Vector2(.1f,0);
-    public float speed;
-    public float speedRun; 
-    public float forceJump = 2;
-    private bool _isrunning = false;
-    */
 
     public PoolManager poolManager;
-    //public GameObject projectile;
     public Transform positionToShoot;
     public Transform playerSideReference;
 
+    [Header("Jump Collision Settings")]
+    public Collider2D collider2D;
+    public float distToGround;
+    public float spaceToGround = .1f;
 
     
-    // Update is called once per frame
+    public ParticleSystem ParticleRun;
+    public ParticleSystem ParticleJump;
+
+private  void Awake(){
+
+    if (collider2D != null){
+        distToGround = collider2D.bounds.extents.y;
+    }
+
+}
+
+private bool isGrounded(){
+    //Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, distToGround + spaceToGround);
+    return Physics2D.Raycast(transform.position, -Vector2.up,distToGround + spaceToGround);
+}
+
 
 
     void Update()
     {
            
-
         HandleJump();
         HandleMovement();
 
@@ -47,9 +56,13 @@ public class PlayerMovement : MonoBehaviour
         playerElement._isrunning = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift));
 
 
+
         if (Input.GetKey(KeyCode.LeftArrow)){
             ANIM_player.SetBool("running",true); 
             
+            ActiveParticlesRun();
+
+
             if(playerElement._isrunning == false){
                 player.velocity = new Vector2(-playerElement.speed, player.velocity.y);
             }
@@ -64,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         
         else if (Input.GetKey(KeyCode.RightArrow)){
             ANIM_player.SetBool("running",true);     
-
+            ActiveParticlesRun();
             if(playerElement._isrunning == false){
                 player.velocity = new Vector2(playerElement.speed, player.velocity.y);
             }
@@ -82,9 +95,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleJump(){
 
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded()){
             //ANIM_player.SetBool("isJumping",true);  
             player.velocity = Vector2.up * playerElement.forceJump;
+        
+            if(ParticleJump != null){
+                ParticleJump.Play();
+            }
         }
         
 
@@ -99,5 +116,24 @@ public class PlayerMovement : MonoBehaviour
         obj.GetComponent<Projectile>().side= playerSideReference.transform.localScale.x;
     }
 
+
+    private void ActiveParticlesRun(){
+                
+               /* if (ParticleRun != null){
+
+                    if (isGrounded()) {
+                        if (!ParticleRun.isPlaying) {
+                            ParticleRun.Play();
+                        }
+                    } 
+                    else {
+                        if (ParticleRun.isPlaying) {
+                            ParticleRun.Stop();
+                        }
+                    }
+                }
+               
+            */
+    }
 
 }
