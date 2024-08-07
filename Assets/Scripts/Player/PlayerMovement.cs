@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public Transform positionToShoot;
     public Transform playerSideReference;
 
+    public AudioSource audioSourceJump;
+
     [Header("Jump Collision Settings")]
     public Collider2D collider2D;
     public float distToGround;
@@ -29,10 +31,11 @@ private  void Awake(){
         distToGround = collider2D.bounds.extents.y;
     }
 
+    
 }
 
 private bool isGrounded(){
-    //Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, distToGround + spaceToGround);
+    //Debug.DrawRay(transform.position, -Vector2.up, Color.magenta, distToGround + spaceToGround); 
     return Physics2D.Raycast(transform.position, -Vector2.up,distToGround + spaceToGround);
 }
 
@@ -55,7 +58,9 @@ private bool isGrounded(){
 
         playerElement._isrunning = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftShift));
 
-
+        if(!isGrounded()){
+            ANIM_player.SetBool("isJumping",false); 
+        }
 
         if (Input.GetKey(KeyCode.LeftArrow)){
             ANIM_player.SetBool("running",true); 
@@ -96,7 +101,9 @@ private bool isGrounded(){
     private void HandleJump(){
 
         if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded()){
-            //ANIM_player.SetBool("isJumping",true);  
+            ANIM_player.SetBool("isJumping",true);
+            if (audioSourceJump != null) audioSourceJump.Play();  
+            
             player.velocity = Vector2.up * playerElement.forceJump;
         
             if(ParticleJump != null){
